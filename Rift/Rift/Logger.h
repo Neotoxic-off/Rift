@@ -8,6 +8,8 @@
 #include <iostream>
 #include <iterator>
 
+#include "Logs.h"
+
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"
 #define RED     "\033[31m"
@@ -50,4 +52,5 @@ class Logger
 
     private:
         std::string BuildLog(std::string type, std::string message);
+        bool SaveLog(std::string);
 };

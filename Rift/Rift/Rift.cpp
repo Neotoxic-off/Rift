@@ -2,12 +2,12 @@
 
 Rift::Rift(): logger()
 {
-    logger.Log("wait", LOG_LOADING_RIFT);
+    logger.Log("wait", LOG_WAIT_LOADING_RIFT);
 }
 
 Rift::~Rift()
 {
-    logger.Log("wait", LOG_DESTROYING_RIFT);
+    logger.Log("wait", LOG_WAIT_DESTROYING_RIFT);
 }
 
 void Rift::WriteMemory(DWORD address, const void* data, size_t size)
