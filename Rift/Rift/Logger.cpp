@@ -13,7 +13,6 @@ Logger::~Logger()
 void Logger::Log(std::string type, const std::string message)
 {
     std::ofstream logfile(LOG_FILE, std::ios::app);
-    auto it = log_message.find(type);
     std::string log = BuildLog(type, message);
 
     if (logfile.is_open() == true)

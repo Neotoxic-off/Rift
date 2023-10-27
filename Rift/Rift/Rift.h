@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <iostream>
 
+#include "Logs.h"
 #include "Logger.h"
 
 class Rift

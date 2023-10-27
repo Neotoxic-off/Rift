@@ -20,6 +20,12 @@
 
 #define LOG_FILE "logs.txt"
 
+#define INFO "INFO"
+#define WARN "WARN"
+#define FAIL "FAIL"
+#define DONE "DONE"
+#define WAIT "WAIT"
+
 class Logger
 {
     public:
@@ -30,10 +36,11 @@ class Logger
         };
 
         const std::map<std::string, Log> log_message = {
-            { "info", { "INFO", WHITE } },
-            { "warn", { "WARN", YELLOW } },
-            { "error", { "FAIL", RED } },
-            { "done", { "DONE", GREEN } },
+            { "info", { INFO, WHITE } },
+            { "warn", { WARN, YELLOW } },
+            { "error", { FAIL, RED } },
+            { "done", { DONE, GREEN } },
+            { "wait", { WAIT, CYAN } }
         };
 
         Logger();
