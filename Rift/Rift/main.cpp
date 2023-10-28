@@ -1,19 +1,46 @@
 #include "Rift.h"
 
+#define CHUNK_SIZE 4096
+
 int main(int ac, char **argv)
 {
-    Rift rift = Rift();
+    Rift *rift = new Rift();
+    LPVOID address = (LPVOID)0xB463DFCD80;
+    SIZE_T totalBytesRead = 0;
+    SIZE_T bytesRead = 0;
+    LPVOID buffer = 0;
+    BOOL status_read = NULL;
+    HWND window = NULL;
+    DWORD process = NULL;
+    HANDLE handle = NULL;
+    LPVOID base_address = NULL;
+    LPVOID limit_address = NULL;
 
-    DWORD value = 0;
-    size_t read = 0;
-    DWORD new_value = 100;
-    DWORD process = 12792;
-    void *address = (void *)0x1663B6B0;
-    HANDLE handle = rift.HandleProcess(process);
+    window = rift->SearchWindow(NULL, "2.2.0.0");
 
-    rift.ReadMemory(handle, address, value, read);
-    rift.WriteMemory(handle, address, new_value, read);
-    rift.UnHandle(handle);
+    if (window != NULL)
+    {
+        process = rift->GetProcess(window);
+        if (process != NULL)
+        {
+            handle = rift->HandleProcessRead(process);
+            if (handle != NULL)
+            {
+                base_address = rift->GetBaseAddress(handle);
+                if (base_address != NULL)
+                {
+                    limit_address = rift->GetMemoryLimit(handle, base_address);
+                    rift->ReadMemory(handle, base_address, buffer, 4, bytesRead);
+                    /*for (uint64_t i = (uint64_t)base_address; i < (uint64_t)base_address + (uint64_t)limit_address; i++)
+                    {
+                        rift->ReadMemory(handle, (LPVOID)i, buffer, 4, bytesRead);
+                    }*/
+                    rift->UnHandle(handle);
+                }
+            }
+            
+        }
+    }
 
     return (0);
 }

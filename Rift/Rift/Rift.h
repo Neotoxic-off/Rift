@@ -2,7 +2,9 @@
 
 #include <windows.h>
 #include <iostream>
-#include <Psapi.h>
+#include <psapi.h>
+#include <tlhelp32.h>
+#include <iomanip>
 
 #include "Logs.h"
 #include "Errors.h"
@@ -14,13 +16,16 @@ class Rift
         Rift();
         ~Rift();
 
-        BOOL WriteMemory(HANDLE, void *, DWORD, size_t);
-        BOOL ReadMemory(HANDLE, void *, DWORD, size_t);
-        HANDLE HandleProcess(DWORD);
+        BOOL WriteMemory(HANDLE, LPVOID, LPVOID, SIZE_T, SIZE_T);
+        BOOL ReadMemory(HANDLE, LPCVOID, LPVOID, SIZE_T, SIZE_T);
+        HANDLE HandleProcessRead(DWORD);
+        HANDLE HandleProcessWrite(DWORD);
         BOOL UnHandle(HANDLE);
 
-        void ApplyModifications();
-        void RestoreOriginalState();
+        DWORD GetProcess(HWND);
+        HWND SearchWindow(LPCSTR, LPCSTR);
+        LPVOID GetBaseAddress(HANDLE);
+        LPVOID GetMemoryLimit(HANDLE, LPVOID);
 
     private:
         Logger logger;
