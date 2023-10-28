@@ -27,6 +27,7 @@
 #define FAIL "FAIL"
 #define DONE "DONE"
 #define WAIT "WAIT"
+#define MEMORY "===>"
 
 class Logger
 {
@@ -42,7 +43,8 @@ class Logger
             { "warn", { WARN, YELLOW } },
             { "error", { FAIL, RED } },
             { "done", { DONE, GREEN } },
-            { "wait", { WAIT, CYAN } }
+            { "wait", { WAIT, WHITE } },
+            { "memory", { MEMORY, YELLOW }}
         };
 
         Logger();
