@@ -29,7 +29,7 @@ int main(int ac, char **argv)
                 base_address = rift->GetBaseAddress(handle);
                 if (base_address != NULL)
                 {
-                    limit_address = rift->GetMemoryLimit(handle, base_address);
+                    limit_address = rift->GetProcessMemorySize(handle, base_address);
                     rift->ReadMemory(handle, base_address, buffer, 4, bytesRead);
                     /*for (uint64_t i = (uint64_t)base_address; i < (uint64_t)base_address + (uint64_t)limit_address; i++)
                     {
@@ -38,7 +38,6 @@ int main(int ac, char **argv)
                     rift->UnHandle(handle);
                 }
             }
-            
         }
     }
 

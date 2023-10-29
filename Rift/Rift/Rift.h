@@ -25,7 +25,7 @@ class Rift
         DWORD GetProcess(HWND);
         HWND SearchWindow(LPCSTR, LPCSTR);
         LPVOID GetBaseAddress(HANDLE);
-        LPVOID GetMemoryLimit(HANDLE, LPVOID);
+        LPVOID GetProcessMemorySize(HANDLE, LPVOID);
 
     private:
         Logger logger;
