@@ -1,8 +1,8 @@
 #include "Logger.h"
 
-Logger::Logger()
+Logger::Logger(bool d)
 {
-    // Initialization code
+    display = d;
 }
 
 Logger::~Logger()
@@ -12,9 +12,12 @@ Logger::~Logger()
 
 void Logger::Log(std::string type, const std::string message)
 {
-    std::string log = BuildLog(type, message);
+    if (display == true)
+    {
+        std::string log = BuildLog(type, message);
 
-    SaveLog(log);
+        SaveLog(log);
+    }
 }
 
 std::string Logger::BuildLog(std::string type, std::string message)

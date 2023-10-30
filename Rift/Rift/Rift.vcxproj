@@ -129,14 +129,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Disassembler.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Logs.h" />
+    <ClInclude Include="Opcode.h" />
     <ClInclude Include="Rift.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Disassembler.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Opcode.cpp" />
     <ClCompile Include="Rift.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

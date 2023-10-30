@@ -9,6 +9,7 @@
 #include "Logs.h"
 #include "Errors.h"
 #include "Logger.h"
+#include "Disassembler.h"
 
 class Rift
 {
@@ -16,8 +17,10 @@ class Rift
         Rift();
         ~Rift();
 
-        BOOL WriteMemory(HANDLE, LPVOID, LPVOID, SIZE_T, SIZE_T);
-        BOOL ReadMemory(HANDLE, LPCVOID, LPVOID, SIZE_T, SIZE_T);
+        Disassembler disassembler;
+
+        BOOL WriteMemory(HANDLE, LPVOID, LPVOID, SIZE_T, SIZE_T *);
+        BOOL ReadMemory(HANDLE, LPCVOID, LPVOID, SIZE_T, SIZE_T *);
         HANDLE HandleProcessRead(DWORD);
         HANDLE HandleProcessWrite(DWORD);
         BOOL UnHandle(HANDLE);

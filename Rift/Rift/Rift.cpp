@@ -1,8 +1,10 @@
 #include "Rift.h"
 
-Rift::Rift(): logger()
+Rift::Rift(): logger(false)
 {
     logger.Log("wait", LOG_WAIT_LOADING_RIFT);
+
+    disassembler = Disassembler();
 }
 
 Rift::~Rift()
@@ -10,40 +12,40 @@ Rift::~Rift()
     logger.Log("wait", LOG_WAIT_DESTROYING_RIFT);
 }
 
-BOOL Rift::WriteMemory(HANDLE process, LPVOID address, LPVOID buffer, SIZE_T buffer_size, SIZE_T bytes_read)
+BOOL Rift::WriteMemory(HANDLE process, LPVOID address, LPVOID buffer, SIZE_T buffer_size, SIZE_T *bytes_read)
 {
     BOOL read = false;
 
     logger.Log("wait", LOG_WAIT_MEMORY_WRITE);
-    read = WriteProcessMemory(process, address, &buffer, buffer_size, &bytes_read);
+    read = WriteProcessMemory(process, address, buffer, buffer_size, bytes_read);
 
     if (read == true)
     {
-        logger.Log("done", std::format("{} {}", LOG_DONE_MEMORY_WRITE, address));
-        logger.Log("memory", std::format("[{}]: {}", address, buffer));
+        logger.Log("done", std::format("{} {}", LOG_DONE_MEMORY_WRITE, (LPVOID)address));
+        logger.Log("memory", std::format("[{}]: {}", (LPVOID)address, buffer));
     }
     else {
-        logger.Log("error", std::format("{} {}: {}", LOG_FAIL_MEMORY_WRITE, address, GetLastError()));
+        logger.Log("error", std::format("{} {}: {}", LOG_FAIL_MEMORY_WRITE, (LPVOID)address, GetLastError()));
     }
 
     return (read);
 }
 
-BOOL Rift::ReadMemory(HANDLE process, LPCVOID address, LPVOID buffer, SIZE_T buffer_size, SIZE_T bytes_read)
+BOOL Rift::ReadMemory(HANDLE process, LPCVOID address, LPVOID buffer, SIZE_T buffer_size, SIZE_T *bytes_read)
 {
     BOOL read = false;
 
     logger.Log("wait", LOG_WAIT_MEMORY_READ);
-    read = ReadProcessMemory(process, (void *)address, &buffer, buffer_size, &bytes_read);
+    read = ReadProcessMemory(process, address, buffer, buffer_size, bytes_read);
 
     if (read == true)
     {
-        logger.Log("done", std::format("{} {}", LOG_DONE_MEMORY_READ, address));
-        logger.Log("memory", std::format("[{}]: {} ({} bytes)", address, buffer, buffer_size));
+        logger.Log("done", std::format("{} {}", LOG_DONE_MEMORY_READ, (LPVOID)address));
+        logger.Log("memory", std::format("[{}]: {} ({} bytes)", (LPVOID)address, buffer, (SIZE_T)buffer_size));
     }
     else
     {
-        logger.Log("error", std::format("{} {}", LOG_FAIL_MEMORY_READ, address));
+        logger.Log("error", std::format("{} {}", LOG_FAIL_MEMORY_READ, (LPVOID)address));
     }
 
     return (read);

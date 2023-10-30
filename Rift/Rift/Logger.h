@@ -47,12 +47,14 @@ class Logger
             { "memory", { MEMORY, YELLOW }}
         };
 
-        Logger();
+        Logger(bool);
         ~Logger();
 
         void Log(std::string, const std::string);
 
     private:
+        bool display = true;
+
         std::string BuildLog(std::string type, std::string message);
         bool SaveLog(std::string);
 };
