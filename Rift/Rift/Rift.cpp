@@ -1,6 +1,6 @@
 #include "Rift.h"
 
-Rift::Rift(): logger(false)
+Rift::Rift(): logger(true)
 {
     logger.Log("wait", LOG_WAIT_LOADING_RIFT);
 
@@ -74,7 +74,7 @@ HANDLE Rift::HandleProcessWrite(DWORD process_id)
     HANDLE handle = NULL;
 
     logger.Log("wait", std::format("{} {}", LOG_WAIT_HANDLING, process_id));
-    handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_WRITE, FALSE, process_id);
+    handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, process_id);
     if (handle != NULL)
     {
         logger.Log("done", std::format("{} {}", LOG_DONE_HANDLING, process_id));
