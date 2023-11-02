@@ -34,7 +34,7 @@ int main(int ac, char **argv)
                         rift->ReadMemory(handle, current_address, &buffer, 1, &bytes_read);
 
                         byte = static_cast<int>(*reinterpret_cast<unsigned char*>(buffer));
-                        rift->disassembler.Add(current_address, byte);
+                        rift->disassembler.GetInstruction(current_address, byte);
                     }*/
                     rift->UnHandle(handle);
                 }

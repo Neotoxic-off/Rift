@@ -51,6 +51,17 @@ BOOL Rift::ReadMemory(HANDLE process, LPCVOID address, LPVOID buffer, SIZE_T buf
     return (read);
 }
 
+template<typename T>
+BOOL Rift::ReadMemoryData(T type, HANDLE process, LPCVOID address, LPVOID buffer, SIZE_T *bytes_read)
+{
+    SIZE_T buffer_size = sizeof(type);
+    BOOL state = false;
+
+    state = this->ReadMemory(process, address, buffer, buffer_size, bytes_read);
+
+    return (state);
+}
+
 HANDLE Rift::HandleProcessRead(DWORD process_id)
 {
     HANDLE handle = NULL;
