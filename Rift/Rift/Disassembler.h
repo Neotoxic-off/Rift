@@ -11,7 +11,7 @@ class Disassembler
 		Disassembler();
 		~Disassembler();
 
-		size_t Add(LPVOID, int);
+		size_t GetInstruction(LPVOID, int);
 
 	private:
 		std::vector<Opcode> memory;

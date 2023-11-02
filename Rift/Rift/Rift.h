@@ -21,6 +21,7 @@ class Rift
 
         BOOL WriteMemory(HANDLE, LPVOID, LPVOID, SIZE_T, SIZE_T *);
         BOOL ReadMemory(HANDLE, LPCVOID, LPVOID, SIZE_T, SIZE_T *);
+        template<typename T>
         BOOL ReadMemoryData(T, HANDLE, LPCVOID, LPVOID, SIZE_T *);
         HANDLE HandleProcessRead(DWORD);
         HANDLE HandleProcessWrite(DWORD);
